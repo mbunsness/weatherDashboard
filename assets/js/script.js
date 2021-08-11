@@ -1,5 +1,16 @@
 
-
+var cities = [];
+function cityHistory(){
+    cities = JSON.parse(localStorage.getItem("cities"));
+    $("#memoryCity").empty();
+    $(cities).each(function (i) {
+      var memoryBtn = $("<button>").text(cities[i]).addClass("cityBtn");
+      $("#memoryCity").append(memoryBtn).append("<br />");
+    })
+}
+if (localStorage.getItem("cities") !== null) {
+    cityHistory();
+  }
 
 
 $("#citySearchBtn").on("click", function (){
@@ -14,12 +25,12 @@ $.ajax({
 })
 .then(function (data){
     console.log(data);
- 
+   // this is where we output the data for the cards we can use the index too append data to the cards
     for (i = 0; i < data.list.length; i = i + 8){ //for loop for the 3 hr weather API (multiples of 8 *3 = 24 to get daily)
         console.log(data.list[i].main.temp);
-        console.log(i);
-        
+        console.log(i);    
     }
+    
 });
 });
 
